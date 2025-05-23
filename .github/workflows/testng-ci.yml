@@ -1,0 +1,38 @@
+name: TestNG CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: 'Test suite to run (smoke, regression, or default)'
+        required: false
+        default: ''
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean compile
+
+      - name: Run TestNG Suite
+        run: |
+          if [ -z "${{ github.event.inputs.suite }}" ]; then
+            mvn test  # Runs default testng.xml
+          else
+            mvn test -Dsuite=${{ github.event.inputs.suite }}
+          fi

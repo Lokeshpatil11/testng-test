@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Default Suite">
+  <test name="Default Tests">
+    <groups>
+      <run>
+        <include name="default"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.example.tests.YourTests" />
+    </classes>
+  </test>
+</suite>
