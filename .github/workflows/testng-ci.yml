@@ -39,7 +39,7 @@ jobs:
 
       - name: Archive TestNG reports
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: testng-reports
           path: target/surefire-reports/
