@@ -32,14 +32,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Run TestNG suite
-  run: |
-    if [ -z "${{ github.event.inputs.suite }}" ]; then
-      echo "No suite provided. Running default suite: testng.xml"
-      mvn test
-    else
-      echo "Running custom suite: ${{ github.event.inputs.suite }}.xml"
-      mvn test -Dsuite=${{ github.event.inputs.suite }}
-    fi
+        run: |
+              if [ -z "${{ github.event.inputs.suite }}" ]; then
+                echo "No suite provided. Running default suite: testng.xml"
+                mvn test
+              else
+                echo "Running custom suite: ${{ github.event.inputs.suite }}.xml"
+                mvn test -Dsuite=${{ github.event.inputs.suite }}
+              fi
   
 
       - name: Archive TestNG reports
